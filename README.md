@@ -21,7 +21,7 @@ Provides views to redirect incoming request to another API server.
 #Installation#
 
 ```bash
-$ pip install django-rest-framework-proxy
+$ poetry add ws-django-rest-framework-proxy
 ```
 
 #Usage#

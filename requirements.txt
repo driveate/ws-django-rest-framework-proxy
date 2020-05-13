@@ -1,2 +1,0 @@
--r requirements/requirements-development.txt
--r requirements/requirements-testing.txt

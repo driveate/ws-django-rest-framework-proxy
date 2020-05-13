@@ -1,0 +1,32 @@
+[tool.poetry]
+name = "ws-django-rest-framework-proxy"
+version = "0.1.0"
+description = "Provides views to redirect incoming request to another API server."
+authors = ["Tomi Pajunen"]
+readme = "README.md"
+repository = "https://github.com/driveate/ws-django-rest-framework-proxy"
+
+packages = [
+    { include = "rest_framework_proxy" },
+]
+
+include = ["README.md"]
+
+[tool.poetry.dependencies]
+python = "^3.8"
+
+django = "^2.0 || ^3.0"
+djangorestframework = "^3.11.0"
+requests = "^2.23.0"
+six = "^1.14.0"
+
+[tool.poetry.dev-dependencies]
+coverage = "^5.1"
+coveralls = "^2.0.0"
+mock = "^4.0.2"
+nose = "^1.3.7"
+django-nose = "^1.4.6"
+
+[build-system]
+requires = ["poetry>=0.12"]
+build-backend = "poetry.masonry.api"
