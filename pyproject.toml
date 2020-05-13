@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "ws-django-rest-framework-proxy"
-version = "0.1.0"
+version = "0.1.2"
 description = "Provides views to redirect incoming request to another API server."
 authors = ["Tomi Pajunen"]
 readme = "README.md"

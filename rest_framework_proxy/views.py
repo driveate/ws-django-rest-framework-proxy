@@ -50,7 +50,7 @@ class ProxyView(BaseProxyView):
             for param in self.proxy_settings.DISALLOWED_PARAMS:
                 if param in qp:
                     del qp[param]
-            return six.lists(qp)
+            return six.iteritems(qp)
         return {}
 
     def get_request_data(self, request):
@@ -74,9 +74,7 @@ class ProxyView(BaseProxyView):
         }
 
     def get_headers(self, request):
-        #import re
-        #regex = re.compile('^HTTP_')
-        #request_headers = dict((regex.sub('', header), value) for (header, value) in request.META.items() if header.startswith('HTTP_'))
+
         headers = self.get_default_headers(request)
 
         # Translate Accept HTTP field
@@ -87,13 +85,14 @@ class ProxyView(BaseProxyView):
         username = self.proxy_settings.AUTH.get('user')
         password = self.proxy_settings.AUTH.get('password')
         if username and password:
-            auth_token = '%s:%s' % (username, password)
-            auth_token = base64.b64encode(auth_token.encode('utf-8')).decode()
-            headers['Authorization'] = 'Basic %s' % auth_token
+            b = bytes(f'{username}:{password}', 'utf-8')
+            auth_token = base64.encodebytes(b).decode('utf-8').replace('\n', '')
+            headers['Authorization'] = f'Basic {auth_token}'
         else:
             auth_token = self.proxy_settings.AUTH.get('token')
             if auth_token:
                 headers['Authorization'] = auth_token
+
         return headers
 
     def get_verify_ssl(self, request):
